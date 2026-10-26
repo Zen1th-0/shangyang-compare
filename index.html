@@ -251,15 +251,72 @@
   footer .rule{margin:0 auto 22px;animation:none}
   footer a{color:var(--gold-1);text-decoration:none;border-bottom:1px dotted var(--hairline)}
 
+  /* ============ 背景速览与时间轴 ============ */
+  .backdrop{
+    margin-top:56px;
+    border:1px solid var(--hairline);border-radius:14px;
+    background:linear-gradient(180deg, rgba(220,180,92,.07), rgba(220,180,92,.02));
+    padding:32px 38px 28px;
+    opacity:0;transform:translateY(70px);
+    transition:opacity .9s ease, transform .9s cubic-bezier(.2,.9,.3,1.1);
+  }
+  .backdrop.in{opacity:1;transform:translateY(0)}
+  .backdrop h2{
+    font-size:22px;letter-spacing:.24em;color:var(--gold-1);font-weight:700;
+    display:flex;align-items:center;gap:14px;
+  }
+  .backdrop h2::after{content:"";flex:1;height:1px;
+    background:linear-gradient(90deg,var(--hairline),transparent)}
+  .backdrop p{margin-top:16px;font-size:15px;line-height:2.1;color:#e9dfc6}
+  .backdrop p b{color:var(--gold-1);font-weight:600}
+  .timeline{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+  .timeline::before{content:"";position:absolute;left:3%;right:3%;top:7px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold-2) 20%,var(--gold-2) 80%,transparent)}
+  .tstop{position:relative;text-align:center;padding-top:24px}
+  .tstop::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:16px;height:16px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#fff3c4,var(--gold-2) 60%,#6e5218);
+    box-shadow:0 0 14px rgba(220,180,92,.65)}
+  .tstop .yr{font-size:14.5px;color:var(--gold-1);letter-spacing:.08em;font-weight:700}
+  .tstop .ev{margin-top:6px;font-size:13px;color:#ddd2b4;line-height:1.7}
+  .tstop .dist{margin-top:4px;font-size:12px;color:var(--acc,#c9a04e)}
+
+  /* ============ 三书对照一览表 ============ */
+  .tablewrap{
+    margin-top:70px;opacity:0;transform:translateY(70px);
+    transition:opacity .9s ease, transform .9s cubic-bezier(.2,.9,.3,1.1);
+  }
+  .tablewrap.in{opacity:1;transform:translateY(0)}
+  .tablewrap h2{
+    font-size:clamp(22px,3vw,30px);letter-spacing:.22em;font-weight:900;text-align:center;
+    background:linear-gradient(100deg,var(--gold-3),var(--gold-1) 50%,var(--gold-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;display:block;
+  }
+  .tablewrap .tsub{text-align:center;margin-top:8px;font-size:13px;color:var(--paper-dim);letter-spacing:.2em}
+  .scrollbox{margin-top:26px;overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.4)}
+  table.cmp{width:100%;border-collapse:collapse;min-width:840px;background:rgba(0,0,0,.2)}
+  table.cmp th,table.cmp td{padding:14px 18px;border:1px solid rgba(220,180,92,.18);
+    vertical-align:top;font-size:14px;line-height:1.9;text-align:left;color:#e9dfc6}
+  table.cmp th{background:rgba(220,180,92,.13);color:var(--gold-1);letter-spacing:.06em;font-weight:700}
+  table.cmp th small{display:block;margin-top:4px;font-weight:400;font-size:11.5px;color:var(--paper-dim);letter-spacing:.15em}
+  table.cmp td.dim{width:100px;color:var(--gold-1);letter-spacing:.14em;background:rgba(220,180,92,.06);white-space:nowrap}
+  table.cmp tbody tr{transition:background .3s}
+  table.cmp tbody tr:hover{background:rgba(220,180,92,.07)}
+
   /* ============ 响应式 ============ */
   @media (max-width:1020px){
     .columns{grid-template-columns:1fr;max-width:640px;margin-left:auto;margin-right:auto}
     .col:nth-child(1){--tilt:0deg}
     .col:nth-child(3){--tilt:0deg}
+    .timeline{grid-template-columns:repeat(2,1fr);row-gap:30px}
+    .timeline::before{display:none}
+    .backdrop{padding:26px 22px}
   }
   @media (max-width:640px){
     .judgment{padding:28px 22px}
     .judgment li{font-size:14.5px;padding-left:38px}
+    .timeline{grid-template-columns:1fr;row-gap:26px}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -294,6 +351,17 @@
   </header>
 
   <main>
+    <section class="backdrop" aria-label="背景速览">
+      <h2>背景速览</h2>
+      <p>商鞅（约前390—前338），本名公孙鞅，又称卫鞅，入秦说秦孝公，先后于<b>前356年、前350年</b>两度主持变法：编户什伍、连坐相纠，奖励耕战、计功授爵，废井田、开阡陌、集小都乡邑为县。秦国由此崛起，为日后兼并六国奠基；然而孝公一死，商鞅旋即被告谋反，出逃无门，兵败身死，举家被灭。<b>同一个商鞅，三部史书先后为他落笔——成书相距数百年乃至千年，题材选取与褒贬结论各不相同。</b>三支笔离商鞅有多远？</p>
+      <div class="timeline">
+        <div class="tstop" style="--acc:#c8564a"><div class="yr">前338年</div><div class="ev">商鞅兵败车裂</div><div class="dist">故事在此落幕</div></div>
+        <div class="tstop" style="--acc:#c9a04e"><div class="yr">约前91年</div><div class="ev">《史记》成书</div><div class="dist">距商鞅约 240 年</div></div>
+        <div class="tstop" style="--acc:#7f9db8"><div class="yr">约公元70年</div><div class="ev">《汉书》修成</div><div class="dist">距商鞅约 410 年</div></div>
+        <div class="tstop" style="--acc:#b892c9"><div class="yr">1084年</div><div class="ev">《资治通鉴》成书</div><div class="dist">距商鞅约 1400 年</div></div>
+      </div>
+    </section>
+
     <section class="columns" aria-label="三列原文对照">
 
       <!-- 第一列 · 史记 -->
@@ -305,6 +373,11 @@
           <blockquote class="quote">
             <span class="lbl">新法</span><br>
             令民为什伍，而相牧司连坐。不告奸者腰斩，告奸者与斩敌首同赏，匿奸者与降敌同罚。……僇力本业，耕织致粟帛多者复其身；事末利及怠而贫者，举以为收孥。
+            <span class="src">—— 《史记·商君列传》</span>
+          </blockquote>
+          <blockquote class="quote">
+            <span class="lbl">廷辩</span><br>
+            鞅曰：“治世不一道，便国不法古。故汤武不循古而王，夏殷不易礼而亡。反古者不可非，而循礼者不足多。”孝公曰：“善。”
             <span class="src">—— 《史记·商君列传》</span>
           </blockquote>
           <blockquote class="quote">
@@ -341,12 +414,17 @@
           </blockquote>
           <blockquote class="quote">
             <span class="lbl">董仲舒曰（班固所引）</span><br>
-            至秦则不然，用商鞅之法，改帝王之制，除井田，民得卖买。富者田连阡陌，贫者亡立锥之地。……或耕豪民之田，见税什五。故贫民常衣牛马之衣，而食犬彘之食。
+            至秦则不然，用商鞅之法，改帝王之制，除井田，民得卖买。富者田连阡陌，贫者亡立锥之地，又颛川泽之利，管山林之饶。……或耕豪民之田，见税什五。故贫民常衣牛马之衣，而食犬彘之食。
             <span class="src">—— 《汉书·食货志上》</span>
+          </blockquote>
+          <blockquote class="quote">
+            <span class="lbl">汉世之镜</span><br>
+            今农夫五口之家，其服役者不下二人，其能耕者不过百亩，百亩之收不过百石。……勤苦如此，尚复被水旱之灾，急政暴虐，赋敛不时……
+            <span class="src">—— 班固引晁错语 · 《汉书·食货志上》</span>
           </blockquote>
         </div>
 
-        <p class="gist"><b>大意</b>班固几乎不谈商鞅的为人，只谈“制度与民生”：富强被承认（“务本”“雄诸侯”），但紧接一个“然”字转折——井田旧制瓦解、贫富悬殊，才是食货志真正忧心的事。商鞅在这里不是一个人物，而是一项政策。</p>
+        <p class="gist"><b>大意</b>班固几乎不谈商鞅的为人，只谈“制度与民生”：富强被承认（“务本”“雄诸侯”），但紧接一个“然”字转折——井田旧制瓦解、贫富悬殊，才是食货志真正忧心的事；志中更引晁错之语，把笔锋引向汉世农夫——病根种于秦，而痛发作于汉。商鞅在这里不是一个人物，而是一项政策。</p>
 
         <div class="questions">
           <h4>思考问题</h4>
@@ -367,8 +445,18 @@
             <span class="src">—— 《资治通鉴》周显王十年</span>
           </blockquote>
           <blockquote class="quote">
+            <span class="lbl">廷辩</span><br>
+            卫鞅曰：“常人安于故俗，学者溺于所闻……智者作法，愚者制焉；贤者更礼，不肖者拘焉。”公曰：“善。”
+            <span class="src">—— 《资治通鉴》周显王十年</span>
+          </blockquote>
+          <blockquote class="quote">
             <span class="lbl">行法</span><br>
             于是太子犯法。卫鞅曰：“法之不行，自上犯之。”将法太子。太子，嗣君也，不可施刑，刑其傅公子虔，黥其师公孙贾。
+            <span class="src">—— 《资治通鉴》周显王十年</span>
+          </blockquote>
+          <blockquote class="quote">
+            <span class="lbl">十年之效</span><br>
+            行之十年，秦国道不拾遗，山无盗贼，民勇于公战，怯于私斗，乡邑大治。
             <span class="src">—— 《资治通鉴》周显王十年</span>
           </blockquote>
           <blockquote class="quote">
@@ -388,6 +476,62 @@
       </article>
     </section>
 
+    <!-- 三书对照一览 -->
+    <section class="tablewrap" aria-label="三书对照一览">
+      <h2>三书对照一览</h2>
+      <p class="tsub">取景框不同，看到的历史就不同</p>
+      <div class="scrollbox">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th style="width:104px">维度</th>
+            <th>《史记 · 商君列传》<small>纪传体 · 西汉 · 约前91年</small></th>
+            <th>《汉书 · 食货志》<small>政书 · 东汉 · 约公元70年</small></th>
+            <th>《资治通鉴 · 周纪二》<small>编年体 · 北宋 · 1084年</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="dim">取景框</td>
+            <td>为一个“人”立传——写命运</td>
+            <td>为一段经济史作志——写田与赋</td>
+            <td>为帝王作镜鉴——写治道</td>
+          </tr>
+          <tr>
+            <td class="dim">记住了什么</td>
+            <td>进身、廷辩、行法、出逃、车裂的完整轨迹</td>
+            <td>坏井田、开阡陌、急耕战之赏与贫富分化</td>
+            <td>徙木立信、刑太子师傅、十年大治</td>
+          </tr>
+          <tr>
+            <td class="dim">遗忘了什么</td>
+            <td>几乎不记变法对寻常秦人日常的具体重塑</td>
+            <td>商鞅其人的一切性格、故事与命运</td>
+            <td>私人恩怨与戏剧性细节，人物被“压平”为案例</td>
+          </tr>
+          <tr>
+            <td class="dim">评价结论</td>
+            <td>“天资刻薄”“少恩”“卒受恶名於秦”</td>
+            <td>承认“倾邻国而雄诸侯”，痛斥“王制遂灭”“贫者食糟糠”</td>
+            <td>“商君尤称刻薄”，却引其“不敢忘信”垂训君主</td>
+          </tr>
+          <tr>
+            <td class="dim">写作动机</td>
+            <td>为一个悲剧人物盖棺论定</td>
+            <td>为汉代民生困局追根溯源</td>
+            <td>为“四海治平之政者”立法戒</td>
+          </tr>
+          <tr>
+            <td class="dim">我的追问</td>
+            <td>恶名应归其人，还是归其法？</td>
+            <td>富国与富民，为何在同一条法令里分道？</td>
+            <td>批评其人与借用其法，何以并存？</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
     <!-- 我的判断 -->
     <section class="judgment" aria-label="我的判断">
       <h2>我的判断</h2>
@@ -404,7 +548,9 @@
 
   <footer>
     <div class="rule" aria-hidden="true"></div>
-    <p>原文据中华书局点校本节录，删节处以“……”标示；个别异文从通行引文。<br>
+    <p><b style="color:var(--gold-1);letter-spacing:.12em">参考文献</b><br>
+    〔西汉〕司马迁《史记 · 商君列传》　〔东汉〕班固《汉书 · 食货志》　〔北宋〕司马光《资治通鉴 · 周纪二》<br>
+    原文均据中华书局点校本节录，删节处以“……”标示，个别异文从通行引文。<br>
     本页为对照阅读作业成果，由 AI 工具辅助整理生成，供课堂交流与学习讨论。</p>
   </footer>
 
@@ -432,7 +578,7 @@
 
   // 滚动入场
   (function(){
-    var targets = document.querySelectorAll('.col, .judgment, footer');
+    var targets = document.querySelectorAll('.col, .judgment, .backdrop, .tablewrap, footer');
     if(!('IntersectionObserver' in window)){ targets.forEach(function(t){t.classList.add('in')}); return; }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
